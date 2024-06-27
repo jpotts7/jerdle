@@ -1,8 +1,11 @@
 // Build Jerdle Grid
 const NUMBER_OF_CELLS = 36;
 const body = document.querySelector('body');
+const gridWrapper = document.querySelector('.grid-wrapper');
 const grid = document.querySelector('section');
+const keyboard = document.querySelector('#keyboard');
 const keyboardLetters = document.querySelectorAll('.keyboard-letter');
+const challengeModeToggle = document.querySelector('#challenge-input');
 let row = 1;
 let currentActiveRow;
 
@@ -30,6 +33,15 @@ for (let i = 1; i <= NUMBER_OF_CELLS; i++) {
 currentActiveRow = document.querySelectorAll(`.row-${row}`);
 currentActiveRow.forEach((cell) => cell.classList.add('active'));
 // activeRow = currentActiveRow;
+
+// Determine whether or not to show the keyboard (challenge mode).
+challengeModeToggle.addEventListener('change', () => {
+  if (challengeModeToggle.checked) {
+    keyboard.classList.add('hide');
+  } else {
+    keyboard.classList.remove('hide');
+  }
+});
 
 // Write word in current row.
 body.addEventListener('keydown', (e) => {

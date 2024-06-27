@@ -17,7 +17,6 @@
 
 body {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   font-family: Inter, sans-serif;
 }
@@ -28,6 +27,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 0 1 33%;
 }
 
 #grid {
@@ -86,7 +86,9 @@ button {
 }
 
 .error {
+  flex: 0 1 33%;
   animation: fadeInOut 3s ease-in-out forwards;
+  text-align: center;
 }
 
 /* Keyboard Hints */
@@ -97,6 +99,12 @@ button {
   align-items: center;
   gap: 4px;
   padding-top: 32px;
+  opacity: 1;
+  transition: opacity 0.5s;
+
+  &.hide {
+    opacity: 0;
+  }
 }
 
 .keyboard-row {
@@ -116,9 +124,16 @@ button {
 }
 
 /* Difficulty Switch */
-fieldset {
+
+.challenge-switch {
   flex: 0 1 33%;
-  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#challenge-label {
+  font-weight: 500;
 }
 
 .switch {
@@ -127,6 +142,7 @@ fieldset {
   flex-direction: column;
   width: 60px;
   height: 32px;
+  margin-top: 12px;
 }
 
 .switch input {
