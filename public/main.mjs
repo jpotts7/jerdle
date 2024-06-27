@@ -117,6 +117,51 @@ async function submitGuessedWord(word) {
   }
 }
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function revealLetters(clues) {
+  for (let i = 0; i < currentActiveRow.length; i++) {
+    const cell = currentActiveRow[i];
+    await delay(300);
+    cell.style.backgroundColor = clues[i].color;
+    cell.classList.remove('active');
+  }
+
+  clues.forEach((clue) => {
+    const targetedKeyboardLetter = [...keyboardLetters].find(
+      (letter) => letter.innerText.toLowerCase() === clue.letter,
+    );
+    targetedKeyboardLetter.style.backgroundColor = clue.color;
+  });
+}
+
+function prepNextRow(clues) {
+  if (clues.every((clue) => clue.color === 'var(--green)')) {
+    // Use a postSuccessMessage function instead.
+    postErrorMessage('You guessed it!');
+    return;
+  }
+
+  row++;
+
+  const nextActiveRow = document.querySelectorAll(`.row-${row}`);
+
+  if (nextActiveRow.length === 0) {
+    postErrorMessage('You lost! :(');
+    return;
+  }
+
+  nextActiveRow.forEach((cell) => cell.classList.add('active'));
+
+  currentActiveRow = nextActiveRow;
+
+  const errorMessage = document.querySelector('.error');
+
+  if (errorMessage) {
+    document.body.removeChild(errorMessage);
+  }
+}
+
 async function handleSubmit(e) {
   e.preventDefault();
 
@@ -141,42 +186,9 @@ async function handleSubmit(e) {
   }
 
   const clues = await submitGuessedWord(word);
-
-  currentActiveRow.forEach((cell, i) => {
-    cell.style.backgroundColor = clues[i].color;
-    cell.classList.remove('active');
-  });
-
-  clues.forEach((clue) => {
-    const targetedKeyboardLetter = [...keyboardLetters].find(
-      (letter) => letter.innerText.toLowerCase() === clue.letter,
-    );
-    targetedKeyboardLetter.style.backgroundColor = clue.color;
-  });
-
-  if (clues.every((clue) => clue.color === 'var(--green)')) {
-    alert('You guessed it!');
-    return;
-  }
-
-  row++;
-
-  const nextActiveRow = document.querySelectorAll(`.row-${row}`);
-
-  if (nextActiveRow.length === 0) {
-    postErrorMessage('You lost! :(');
-    return;
-  }
-
-  nextActiveRow.forEach((cell) => cell.classList.add('active'));
-
-  currentActiveRow = nextActiveRow;
-
-  const errorMessage = document.querySelector('.error');
-
-  if (errorMessage) {
-    document.body.removeChild(errorMessage);
-  }
+  await revealLetters(clues);
+  await delay(300);
+  prepNextRow(clues);
 }
 
 function handleKeyDown(e) {
