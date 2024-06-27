@@ -5,6 +5,7 @@
   --active: #f2e8d8;
   --darker-rose: #ddb8a6;
   --tan: #b7ada0;
+  --gray: #ccc;
 }
 
 /* Animations */
@@ -129,7 +130,7 @@ button {
   width: 24px;
   padding: 8px 4px 8px 4px;
   border-radius: 8px;
-  border: 1px solid darkgray;
+  border: 1px solid var(--gray);
 }
 
 /* Difficulty Switch */
@@ -167,7 +168,7 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--gray);
   transition: 0.4s;
 }
 

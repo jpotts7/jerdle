@@ -1,7 +1,6 @@
 // Build Jerdle Grid
 const NUMBER_OF_CELLS = 36;
 const body = document.querySelector('body');
-const gridWrapper = document.querySelector('.grid-wrapper');
 const grid = document.querySelector('section');
 const keyboard = document.querySelector('#keyboard');
 const keyboardLetters = document.querySelectorAll('.keyboard-letter');
@@ -95,11 +94,11 @@ async function checkWordValidity(word) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ word }),
     });
-
     const wordStatus = await response.json();
     return wordStatus;
   } catch (err) {
     console.error(err);
+    postErrorMessage(err.message);
   }
 }
 
@@ -110,11 +109,11 @@ async function submitGuessedWord(word) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ word }),
     });
-
     const clues = await response.json();
     return clues;
   } catch (err) {
     console.log(err);
+    postErrorMessage(err.message);
   }
 }
 
