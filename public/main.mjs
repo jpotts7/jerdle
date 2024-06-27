@@ -10,20 +10,23 @@ let currentActiveRow;
 
 for (let i = 1; i <= NUMBER_OF_CELLS; i++) {
   const cell = document.createElement('div');
+  let rowClass;
 
   if (i >= 1 && i <= 6) {
-    cell.classList.add('cell', `cell-${i}`, 'row-1');
+    rowClass = 'row-1';
   } else if (i >= 7 && i <= 12) {
-    cell.classList.add('cell', `cell-${i}`, 'row-2');
+    rowClass = 'row-2';
   } else if (i >= 13 && i <= 18) {
-    cell.classList.add('cell', `cell-${i}`, 'row-3');
+    rowClass = 'row-3';
   } else if (i >= 19 && i <= 24) {
-    cell.classList.add('cell', `cell-${i}`, 'row-4');
+    rowClass = 'row-4';
   } else if (i >= 25 && i <= 30) {
-    cell.classList.add('cell', `cell-${i}`, 'row-5');
+    rowClass = 'row-5';
   } else {
-    cell.classList.add('cell', `cell-${i}`, 'row-6');
+    rowClass = 'row-6';
   }
+
+  cell.classList.add('cell', `cell-${i}`, rowClass);
 
   grid.appendChild(cell);
 }
