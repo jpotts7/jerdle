@@ -1,6 +1,7 @@
 // Build Jerdle Grid
 const NUMBER_OF_CELLS = 36;
 const body = document.querySelector('body');
+const main = document.querySelector('main');
 const grid = document.querySelector('section');
 const keyboard = document.querySelector('#keyboard');
 const keyboardLetters = document.querySelectorAll('.keyboard-letter');
@@ -56,7 +57,7 @@ body.addEventListener('keydown', (e) => {
     const cell = [...activeRow].find(
       (cell) => !cell.hasAttribute('data-filled'),
     );
-    if (cell === undefined) return;
+    if (!cell) return;
 
     cell.textContent = e.key;
     cell.setAttribute('data-filled', true);
@@ -83,13 +84,13 @@ body.addEventListener('keydown', (e) => {
 function postErrorMessage(message) {
   const staleErrorMessage = document.querySelector('.error');
   if (!!staleErrorMessage) {
-    document.body.removeChild(staleErrorMessage);
+    main.removeChild(staleErrorMessage);
   }
 
   const newErrorMessage = document.createElement('p');
   newErrorMessage.classList.add('error');
   newErrorMessage.textContent = message;
-  document.body.appendChild(newErrorMessage);
+  main.appendChild(newErrorMessage);
 }
 
 async function checkWordValidity(word) {
@@ -163,7 +164,7 @@ function prepNextRow(clues) {
   const errorMessage = document.querySelector('.error');
 
   if (errorMessage) {
-    document.body.removeChild(errorMessage);
+    main.removeChild(errorMessage);
   }
 }
 
