@@ -155,8 +155,9 @@ async function handleSubmit(e) {
     targetedKeyboardLetter.style.backgroundColor = clue.color;
   });
 
-  if (clues.every((clue) => clue.color === 'green')) {
+  if (clues.every((clue) => clue.color === 'var(--green)')) {
     alert('You guessed it!');
+    return;
   }
 
   row++;

@@ -21,17 +21,17 @@ router.post('/', (req, res) => {
   const guessLettersStatus = guessLetters.map((letter, i) => {
     if (guessLetters[i] === answer[i]) {
       return {
-        color: '#88ac88',
+        color: 'var(--green)',
         letter: guessLetters[i],
       };
     } else if (containsLetter(letter)) {
       return {
-        color: '#f9cb9c',
+        color: 'var(--rose)',
         letter: guessLetters[i],
       };
     } else {
       return {
-        color: '#b7ada0',
+        color: 'var(--tan)',
         letter: guessLetters[i],
       };
     }

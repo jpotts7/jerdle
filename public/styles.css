@@ -1,3 +1,12 @@
+/* Color variables */
+:root {
+  --green: #88ac88;
+  --rose: #f8d3c5;
+  --active: #f2e8d8;
+  --darker-rose: #ddb8a6;
+  --tan: #b7ada0;
+}
+
 /* Animations */
 
 @keyframes fadeInOut {
@@ -48,7 +57,7 @@ body {
   font-size: 32px;
 
   &.active {
-    background-color: #f2e8d8;
+    background-color: var(--active);
   }
 }
 
@@ -56,7 +65,7 @@ button {
   position: relative;
   margin-top: 16px;
   padding: 16px;
-  background-color: #f8d3c5;
+  background-color: var(--rose);
   font-family: Inter;
   font-weight: 600;
   border-radius: 8px;
@@ -74,7 +83,7 @@ button {
   }
 
   &:focus {
-    outline-color: #ddb8a6;
+    outline-color: var(--darker-rose);
   }
 
   &:active,
@@ -174,11 +183,11 @@ button {
 }
 
 input:checked + .slider {
-  background-color: #f8d3c5;
+  background-color: var(--rose);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #f8d3c5;
+  box-shadow: 0 0 1px var(--rose);
 }
 
 input:checked + .slider:before {
