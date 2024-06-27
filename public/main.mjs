@@ -168,9 +168,7 @@ function prepNextRow(clues) {
   }
 }
 
-async function handleSubmit(e) {
-  e.preventDefault();
-
+function createWordFromRow() {
   let letterArray = [];
 
   currentActiveRow.forEach((cell) => {
@@ -182,7 +180,13 @@ async function handleSubmit(e) {
     return;
   }
 
-  const word = letterArray.join('');
+  return letterArray.join('');
+}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+
+  const word = createWordFromRow();
 
   const { status, message } = await checkWordValidity(word);
 
