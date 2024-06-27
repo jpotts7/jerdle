@@ -2,6 +2,7 @@
 const NUMBER_OF_CELLS = 36;
 const body = document.querySelector('body');
 const grid = document.querySelector('section');
+const keyboardLetters = document.querySelectorAll('.keyboard-letter');
 let row = 1;
 let currentActiveRow;
 
@@ -133,6 +134,13 @@ async function handleSubmit(e) {
   currentActiveRow.forEach((cell, i) => {
     cell.style.backgroundColor = clues[i].color;
     cell.classList.remove('active');
+  });
+
+  clues.forEach((clue) => {
+    const targetedKeyboardLetter = [...keyboardLetters].find(
+      (letter) => letter.innerText.toLowerCase() === clue.letter,
+    );
+    targetedKeyboardLetter.style.backgroundColor = clue.color;
   });
 
   if (clues.every((clue) => clue.color === 'green')) {

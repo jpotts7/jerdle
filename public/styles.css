@@ -89,14 +89,22 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4px;
   padding-top: 32px;
 }
 
 .keyboard-row {
   display: flex;
+  gap: 4px;
 }
 
 .keyboard-letter {
-  padding: 4px;
-  background-color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px;
+  width: 24px;
+  padding: 8px 4px 8px 4px;
+  border-radius: 8px;
+  border: 1px solid darkgray;
 }

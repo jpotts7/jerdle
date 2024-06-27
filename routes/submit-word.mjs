@@ -22,14 +22,17 @@ router.post('/', (req, res) => {
     if (guessLetters[i] === answer[i]) {
       return {
         color: '#88ac88',
+        letter: guessLetters[i],
       };
     } else if (containsLetter(letter)) {
       return {
         color: '#f9cb9c',
+        letter: guessLetters[i],
       };
     } else {
       return {
         color: '#b7ada0',
+        letter: guessLetters[i],
       };
     }
   });
