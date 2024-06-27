@@ -13,43 +13,55 @@
     <title>Wordle Clone</title>
   </head>
   <body>
-    <h1>Jerdle</h1>
-    <section id="grid"></section>
-    <button type="submit" tabindex="1">Submit</button>
-    <!-- Guessed Letters -->
-    <section id="keyboard">
-      <div class="keyboard-row top">
-        <div class="keyboard-letter">Q</div>
-        <div class="keyboard-letter">W</div>
-        <div class="keyboard-letter">E</div>
-        <div class="keyboard-letter">R</div>
-        <div class="keyboard-letter">T</div>
-        <div class="keyboard-letter">Y</div>
-        <div class="keyboard-letter">U</div>
-        <div class="keyboard-letter">I</div>
-        <div class="keyboard-letter">O</div>
-        <div class="keyboard-letter">P</div>
-      </div>
-      <div class="keyboard-row mid">
-        <div class="keyboard-letter">A</div>
-        <div class="keyboard-letter">S</div>
-        <div class="keyboard-letter">D</div>
-        <div class="keyboard-letter">F</div>
-        <div class="keyboard-letter">G</div>
-        <div class="keyboard-letter">H</div>
-        <div class="keyboard-letter">J</div>
-        <div class="keyboard-letter">K</div>
-        <div class="keyboard-letter">L</div>
-      </div>
-      <div class="keyboard-row bottom">
-        <div class="keyboard-letter">Z</div>
-        <div class="keyboard-letter">X</div>
-        <div class="keyboard-letter">C</div>
-        <div class="keyboard-letter">V</div>
-        <div class="keyboard-letter">B</div>
-        <div class="keyboard-letter">N</div>
-        <div class="keyboard-letter">M</div>
-      </div>
-    </section>
+    <!-- Game Options -->
+    <fieldset>
+      <legend>Options</legend>
+      <label for="mode">Difficulty</label>
+      <label class="switch">
+        <input type="checkbox" id="mode" />
+        <span class="slider round"></span>
+      </label>
+    </fieldset>
+    <!-- Jerdle Grid -->
+    <div class="grid-wrapper">
+      <h1>Jerdle</h1>
+      <section id="grid"></section>
+      <button type="submit" tabindex="1">Submit</button>
+      <!-- Guessed Letters -->
+      <section id="keyboard">
+        <div class="keyboard-row top">
+          <div class="keyboard-letter">Q</div>
+          <div class="keyboard-letter">W</div>
+          <div class="keyboard-letter">E</div>
+          <div class="keyboard-letter">R</div>
+          <div class="keyboard-letter">T</div>
+          <div class="keyboard-letter">Y</div>
+          <div class="keyboard-letter">U</div>
+          <div class="keyboard-letter">I</div>
+          <div class="keyboard-letter">O</div>
+          <div class="keyboard-letter">P</div>
+        </div>
+        <div class="keyboard-row mid">
+          <div class="keyboard-letter">A</div>
+          <div class="keyboard-letter">S</div>
+          <div class="keyboard-letter">D</div>
+          <div class="keyboard-letter">F</div>
+          <div class="keyboard-letter">G</div>
+          <div class="keyboard-letter">H</div>
+          <div class="keyboard-letter">J</div>
+          <div class="keyboard-letter">K</div>
+          <div class="keyboard-letter">L</div>
+        </div>
+        <div class="keyboard-row bottom">
+          <div class="keyboard-letter">Z</div>
+          <div class="keyboard-letter">X</div>
+          <div class="keyboard-letter">C</div>
+          <div class="keyboard-letter">V</div>
+          <div class="keyboard-letter">B</div>
+          <div class="keyboard-letter">N</div>
+          <div class="keyboard-letter">M</div>
+        </div>
+      </section>
+    </div>
   </body>
 </html>
