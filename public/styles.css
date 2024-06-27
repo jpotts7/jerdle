@@ -1,3 +1,5 @@
+/* Animations */
+
 @keyframes fadeInOut {
   0% {
     opacity: 0;
@@ -19,6 +21,8 @@ body {
   align-items: center;
   font-family: Inter, sans-serif;
 }
+
+/* Jerdle Grid */
 
 #grid {
   display: grid;
@@ -77,4 +81,22 @@ button {
 
 .error {
   animation: fadeInOut 3s ease-in-out forwards;
+}
+
+/* Keyboard Hints */
+
+#keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 32px;
+}
+
+.keyboard-row {
+  display: flex;
+}
+
+.keyboard-letter {
+  padding: 4px;
+  background-color: yellow;
 }
