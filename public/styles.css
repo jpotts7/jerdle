@@ -9,7 +9,6 @@
 }
 
 /* Animations */
-
 @keyframes fadeInOut {
   0% {
     opacity: 0;
@@ -25,14 +24,14 @@
   }
 }
 
-body {
+/* Styles */
+main {
   display: flex;
   align-items: center;
   font-family: Inter, sans-serif;
 }
 
 /* Jerdle Grid */
-
 .grid-wrapper {
   display: flex;
   flex-direction: column;
@@ -102,7 +101,6 @@ button {
 }
 
 /* Keyboard Hints */
-
 #keyboard {
   display: flex;
   flex-direction: column;
@@ -134,7 +132,6 @@ button {
 }
 
 /* Difficulty Switch */
-
 .challenge-switch {
   flex: 0 1 33%;
   display: flex;

@@ -37,15 +37,17 @@ currentActiveRow.forEach((cell) => cell.classList.add('active'));
 // activeRow = currentActiveRow;
 
 // Determine whether or not to show the keyboard (challenge mode).
-challengeModeToggle.addEventListener('change', () => {
+function toggleKeyboard() {
   if (challengeModeToggle.checked) {
     keyboard.classList.add('hide');
   } else {
     keyboard.classList.remove('hide');
   }
-});
+}
 
-// Write word in current row.
+challengeModeToggle.addEventListener('click', toggleKeyboard);
+
+// Write word in current active row.
 body.addEventListener('keydown', (e) => {
   const isLetter = /[a-z]/;
   let activeRow = document.querySelectorAll('.active');
