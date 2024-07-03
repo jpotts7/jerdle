@@ -1,4 +1,7 @@
-import { delay } from './utils/delay.js';
+import { delay } from './utils/utils.js';
+import { submitGuessedWord, checkWordValidity } from './utils/apis.js';
+import { postErrorMessage } from './utils/messages.js';
+import { createWordFromRow, revealLetters } from './utils/transforms.js';
 
 // Build Jerdle Grid
 const NUMBER_OF_CELLS = 36;
@@ -83,120 +86,25 @@ body.addEventListener('keydown', (e) => {
   allFilled ? button.focus() : button.blur();
 });
 
-function postErrorMessage(message) {
-  const staleErrorMessage = document.querySelector('.error');
-  if (!!staleErrorMessage) {
-    main.removeChild(staleErrorMessage);
-  }
-
-  const newErrorMessage = document.createElement('p');
-  newErrorMessage.classList.add('error');
-  newErrorMessage.textContent = message;
-  main.appendChild(newErrorMessage);
-}
-
-async function checkWordValidity(word) {
-  try {
-    const response = await fetch('/check-word', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ word }),
-    });
-    const wordStatus = await response.json();
-    return wordStatus;
-  } catch (err) {
-    console.error(err);
-    postErrorMessage(err.message);
-  }
-}
-
-async function submitGuessedWord(word) {
-  try {
-    const response = await fetch('/submit-word', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ word }),
-    });
-    const clues = await response.json();
-    return clues;
-  } catch (err) {
-    console.log(err);
-    postErrorMessage(err.message);
-  }
-}
-
-async function revealLetters(clues) {
-  for (let i = 0; i < currentActiveRow.length; i++) {
-    const cell = currentActiveRow[i];
-    await delay(300);
-    cell.style.backgroundColor = clues[i].color;
-    cell.classList.remove('active');
-  }
-
-  clues.forEach((clue) => {
-    const targetedKeyboardLetter = [...keyboardLetters].find(
-      (letter) => letter.innerText.toLowerCase() === clue.letter,
-    );
-    targetedKeyboardLetter.style.backgroundColor = clue.color;
-  });
-}
-
-function prepNextRow(clues) {
-  if (clues.every((clue) => clue.color === 'var(--green)')) {
-    // Use a postSuccessMessage function instead.
-    postErrorMessage('You guessed it!');
-    return;
-  }
-
-  row++;
-
-  const nextActiveRow = document.querySelectorAll(`.row-${row}`);
-
-  if (nextActiveRow.length === 0) {
-    postErrorMessage('You lost! :(');
-    return;
-  }
-
-  nextActiveRow.forEach((cell) => cell.classList.add('active'));
-
-  currentActiveRow = nextActiveRow;
-
-  const errorMessage = document.querySelector('.error');
-
-  if (errorMessage) {
-    main.removeChild(errorMessage);
-  }
-}
-
-function createWordFromRow() {
-  let letterArray = [];
-
-  currentActiveRow.forEach((cell) => {
-    cell.dataset.filled && letterArray.push(cell.innerText);
-  });
-
-  return letterArray.join('');
-}
-
 async function handleSubmit(e) {
   e.preventDefault();
 
-  const word = createWordFromRow();
+  const word = createWordFromRow(currentActiveRow);
 
   if (word.length !== 6) {
-    postErrorMessage('Please enter a six-letter word.');
+    postErrorMessage('Please enter a six-letter word.', main);
     return;
   }
 
   const { status, message } = await checkWordValidity(word);
 
   if (status === 'error') {
-    postErrorMessage(message);
+    postErrorMessage(message, main);
     return;
   }
 
   const clues = await submitGuessedWord(word);
-  await revealLetters(clues);
+  await revealLetters(clues, keyboardLetters, currentActiveRow);
   await delay(300);
   prepNextRow(clues);
 }
