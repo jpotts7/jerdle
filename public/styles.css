@@ -44,6 +44,7 @@ main {
   grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(6, 1fr);
   border: 1px solid black;
+  position: 'relative';
 }
 
 .cell {
@@ -60,14 +61,6 @@ main {
   &.active {
     background-color: var(--active);
   }
-
-  /* &::after {
-    display: block;
-    content: '';
-    background-color: red;
-    position: absolute;
-    inset: 0;
-  } */
 }
 
 button {

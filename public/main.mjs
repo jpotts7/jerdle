@@ -1,6 +1,6 @@
 import { delay } from './utils/utils.js';
 import { hitApiEndpoint } from './utils/apis.js';
-import { postErrorMessage } from './utils/messages.js';
+import { postMessage } from './utils/message.js';
 import { createWordFromRow, revealLetters } from './utils/transforms.js';
 
 // Build Jerdle Grid
@@ -89,7 +89,7 @@ body.addEventListener('keydown', (e) => {
 function prepNextRow(clues) {
   if (clues.every((clue) => clue.color === 'var(--green)')) {
     // Use a postSuccessMessage function instead.
-    postErrorMessage('You guessed it!');
+    postMessage('You guessed it!', 'success');
     return;
   }
 
@@ -98,7 +98,7 @@ function prepNextRow(clues) {
   const nextActiveRow = document.querySelectorAll(`.row-${row}`);
 
   if (nextActiveRow.length === 0) {
-    postErrorMessage('You lost! :(');
+    postMessage('You lost! :(');
     return;
   }
 
@@ -119,14 +119,14 @@ async function handleSubmit(e) {
   const word = createWordFromRow(currentActiveRow);
 
   if (word.length !== 6) {
-    postErrorMessage('Please enter a six-letter word.', main);
+    postMessage('Please enter a six-letter word.');
     return;
   }
 
   const { status, message } = await hitApiEndpoint(word, '/check-word');
 
   if (status === 'error') {
-    postErrorMessage(message, main);
+    postMessage(message);
     return;
   }
 
