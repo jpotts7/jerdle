@@ -1,3 +1,5 @@
+import { delay } from './utils/delay.js';
+
 // Build Jerdle Grid
 const NUMBER_OF_CELLS = 36;
 const body = document.querySelector('body');
@@ -8,8 +10,6 @@ const keyboardLetters = document.querySelectorAll('.keyboard-letter');
 const challengeModeToggle = document.querySelector('#challenge-input');
 let row = 1;
 let currentActiveRow;
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 for (let i = 1; i <= NUMBER_OF_CELLS; i++) {
   const cell = document.createElement('div');
