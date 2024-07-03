@@ -9,6 +9,8 @@ const challengeModeToggle = document.querySelector('#challenge-input');
 let row = 1;
 let currentActiveRow;
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 for (let i = 1; i <= NUMBER_OF_CELLS; i++) {
   const cell = document.createElement('div');
   let rowClass;
@@ -123,8 +125,6 @@ async function submitGuessedWord(word) {
   }
 }
 
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 async function revealLetters(clues) {
   for (let i = 0; i < currentActiveRow.length; i++) {
     const cell = currentActiveRow[i];
@@ -175,11 +175,6 @@ function createWordFromRow() {
     cell.dataset.filled && letterArray.push(cell.innerText);
   });
 
-  if (letterArray.length !== 6) {
-    postErrorMessage('Please enter a six-letter word.');
-    return;
-  }
-
   return letterArray.join('');
 }
 
@@ -187,6 +182,11 @@ async function handleSubmit(e) {
   e.preventDefault();
 
   const word = createWordFromRow();
+
+  if (word.length !== 6) {
+    postErrorMessage('Please enter a six-letter word.');
+    return;
+  }
 
   const { status, message } = await checkWordValidity(word);
 

@@ -48,6 +48,7 @@ main {
 
 .cell {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
@@ -59,6 +60,14 @@ main {
   &.active {
     background-color: var(--active);
   }
+
+  /* &::after {
+    display: block;
+    content: '';
+    background-color: red;
+    position: absolute;
+    inset: 0;
+  } */
 }
 
 button {
