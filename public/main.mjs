@@ -1,5 +1,5 @@
 import { delay } from './utils/utils.js';
-import { submitGuessedWord, checkWordValidity } from './utils/apis.js';
+import { hitApiEndpoint } from './utils/apis.js';
 import { postErrorMessage } from './utils/messages.js';
 import { createWordFromRow, revealLetters } from './utils/transforms.js';
 
@@ -86,6 +86,33 @@ body.addEventListener('keydown', (e) => {
   allFilled ? button.focus() : button.blur();
 });
 
+function prepNextRow(clues) {
+  if (clues.every((clue) => clue.color === 'var(--green)')) {
+    // Use a postSuccessMessage function instead.
+    postErrorMessage('You guessed it!');
+    return;
+  }
+
+  row++;
+
+  const nextActiveRow = document.querySelectorAll(`.row-${row}`);
+
+  if (nextActiveRow.length === 0) {
+    postErrorMessage('You lost! :(');
+    return;
+  }
+
+  nextActiveRow.forEach((cell) => cell.classList.add('active'));
+
+  currentActiveRow = nextActiveRow;
+
+  const errorMessage = document.querySelector('.error');
+
+  if (errorMessage) {
+    main.removeChild(errorMessage);
+  }
+}
+
 async function handleSubmit(e) {
   e.preventDefault();
 
@@ -96,14 +123,14 @@ async function handleSubmit(e) {
     return;
   }
 
-  const { status, message } = await checkWordValidity(word);
+  const { status, message } = await hitApiEndpoint(word, '/check-word');
 
   if (status === 'error') {
     postErrorMessage(message, main);
     return;
   }
 
-  const clues = await submitGuessedWord(word);
+  const clues = await hitApiEndpoint(word, '/submit-word');
   await revealLetters(clues, keyboardLetters, currentActiveRow);
   await delay(300);
   prepNextRow(clues);
