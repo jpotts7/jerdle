@@ -1,7 +1,6 @@
-export function postMessage(message, element = 'main', type = 'error') {
-  const parentElement = document.querySelector(element);
-
+export function postMessage(message, type = 'error', element = 'main') {
   if (type === 'error') {
+    const parentElement = document.querySelector(element);
     const staleErrorMessage = document.querySelector('.error');
     if (!!staleErrorMessage) {
       parentElement.removeChild(staleErrorMessage);

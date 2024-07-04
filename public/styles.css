@@ -201,3 +201,12 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/* Success Messgae */
+dialog {
+  border: 4px solid var(--rose);
+  outline: none;
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}

@@ -11,6 +11,7 @@ const grid = document.querySelector('section');
 const keyboard = document.querySelector('#keyboard');
 const keyboardLetters = document.querySelectorAll('.keyboard-letter');
 const challengeModeToggle = document.querySelector('#challenge-input');
+const button = document.querySelector('button');
 let row = 1;
 let currentActiveRow;
 
@@ -55,7 +56,7 @@ challengeModeToggle.addEventListener('click', toggleKeyboard);
 
 // Write word in current active row.
 body.addEventListener('keydown', (e) => {
-  const isLetter = /[a-z]/;
+  const isLetter = /[A-Za-z]/;
   let activeRow = document.querySelectorAll('.active');
 
   if (isLetter.test(e.key) && e.key.length === 1) {
@@ -147,6 +148,5 @@ function handleKeyDown(e) {
 }
 
 // Submit Functionality
-const button = document.querySelector('button');
 button.addEventListener('click', handleSubmit);
 button.addEventListener('keydown', handleKeyDown);
