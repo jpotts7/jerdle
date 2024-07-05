@@ -90,7 +90,7 @@ body.addEventListener('keydown', (e) => {
 function prepNextRow(clues) {
   if (clues.every((clue) => clue.color === 'var(--green)')) {
     // Use a postSuccessMessage function instead.
-    postMessage('You guessed it!', 'success');
+    postMessage('You guessed it!', 'dialog');
     return;
   }
 
@@ -99,7 +99,7 @@ function prepNextRow(clues) {
   const nextActiveRow = document.querySelectorAll(`.row-${row}`);
 
   if (nextActiveRow.length === 0) {
-    postMessage('You lost! :(');
+    postMessage('You lost! :(', 'dialog');
     return;
   }
 

@@ -1,4 +1,4 @@
-/* CSS Variables */
+/* Variables */
 :root {
   --green: #88ac88;
   --rose: #f8d3c5;
@@ -8,6 +8,7 @@
   --gray: #ccc;
 
   --reveal: background-color 0.4s ease-in-out;
+  --dialog: all 0.5s ease-in-out allow-discrete;
 }
 
 /* Animations */
@@ -209,12 +210,35 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-/* Success Messgae */
-dialog {
+/* Dialog Message */
+dialog[open] {
   border: 4px solid var(--rose);
   outline: none;
+  opacity: 1;
+}
 
-  &::backdrop {
-    background: rgba(0, 0, 0, 0.3);
+dialog {
+  opacity: 0;
+  transition: var(--dialog);
+}
+
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+  }
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0);
+  transition: var(--dialog);
+}
+
+dialog[open]::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+@starting-style {
+  dialog[open]::backdrop {
+    background: rgba(0, 0, 0, 0);
   }
 }
