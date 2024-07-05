@@ -133,7 +133,7 @@ async function handleSubmit(e) {
 
   const clues = await hitApiEndpoint(word, '/submit-word');
   await revealLetters(clues, keyboardLetters, currentActiveRow);
-  await delay(300);
+  await delay(400);
   prepNextRow(clues);
 }
 

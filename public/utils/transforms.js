@@ -13,7 +13,8 @@ export function createWordFromRow(currentActiveRow) {
 export async function revealLetters(clues, keyboardLetters, currentActiveRow) {
   for (let i = 0; i < currentActiveRow.length; i++) {
     const cell = currentActiveRow[i];
-    await delay(300);
+    await delay(400);
+    cell.classList.add('reveal');
     cell.style.backgroundColor = clues[i].color;
     cell.classList.remove('active');
   }

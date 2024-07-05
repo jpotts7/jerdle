@@ -1,4 +1,4 @@
-/* Color variables */
+/* CSS Variables */
 :root {
   --green: #88ac88;
   --rose: #f8d3c5;
@@ -6,6 +6,8 @@
   --darker-rose: #ddb8a6;
   --tan: #b7ada0;
   --gray: #ccc;
+
+  --reveal: background-color 0.4s ease-in-out;
 }
 
 /* Animations */
@@ -60,6 +62,11 @@ main {
 
   &.active {
     background-color: var(--active);
+    transition: var(--reveal);
+  }
+
+  &.reveal {
+    transition: var(--reveal);
   }
 }
 
@@ -131,6 +138,7 @@ button {
   padding: 8px 4px 8px 4px;
   border-radius: 8px;
   border: 1px solid var(--gray);
+  transition: var(--reveal);
 }
 
 /* Difficulty Switch */
