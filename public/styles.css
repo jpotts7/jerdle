@@ -118,10 +118,11 @@ button {
   gap: 4px;
   padding-top: 32px;
   opacity: 1;
-  transition: opacity 0.5s;
+  transition: all 0.5s;
 
   &.hide {
     opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -135,11 +136,12 @@ button {
   justify-content: center;
   align-items: center;
   height: 24px;
-  width: 24px;
+  min-width: 24px;
   padding: 8px 4px 8px 4px;
   border-radius: 8px;
   border: 1px solid var(--gray);
   transition: var(--reveal);
+  cursor: pointer;
 }
 
 /* Difficulty Switch */

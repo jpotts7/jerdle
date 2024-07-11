@@ -47,29 +47,29 @@ currentActiveRow.forEach((cell) => cell.classList.add('active'));
 function toggleKeyboard() {
   if (challengeModeToggle.checked) {
     keyboard.classList.add('hide');
+    keyboard.removeEventListener('click', enterWord);
   } else {
     keyboard.classList.remove('hide');
+    keyboard.addEventListener('click', enterWord);
   }
 }
 
-challengeModeToggle.addEventListener('click', toggleKeyboard);
-
-// Write word in current active row.
-body.addEventListener('keydown', (e) => {
+function enterWord(e) {
+  const target = e.key || e.target.innerText;
   const isLetter = /[A-Za-z]/;
   let activeRow = document.querySelectorAll('.active');
 
-  if (isLetter.test(e.key) && e.key.length === 1) {
+  if (isLetter.test(target) && target.length === 1) {
     const cell = [...activeRow].find(
       (cell) => !cell.hasAttribute('data-filled'),
     );
     if (!cell) return;
 
-    cell.textContent = e.key;
+    cell.textContent = target;
     cell.setAttribute('data-filled', true);
   }
 
-  if (e.key === 'Backspace' || e.key === 'Delete') {
+  if (target === 'Backspace' || target === 'Delete') {
     const cell = [...activeRow].findLast((cell) =>
       cell.hasAttribute('data-filled'),
     );
@@ -85,7 +85,7 @@ body.addEventListener('keydown', (e) => {
   );
 
   allFilled ? button.focus() : button.blur();
-});
+}
 
 function prepNextRow(clues) {
   if (clues.every((clue) => clue.color === 'var(--green)')) {
@@ -147,6 +147,9 @@ function handleKeyDown(e) {
   }
 }
 
-// Submit Functionality
+// Event Listeners
+body.addEventListener('keydown', enterWord);
+keyboard.addEventListener('click', enterWord);
+challengeModeToggle.addEventListener('click', toggleKeyboard);
 button.addEventListener('click', handleSubmit);
 button.addEventListener('keydown', handleKeyDown);
