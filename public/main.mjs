@@ -47,10 +47,8 @@ currentActiveRow.forEach((cell) => cell.classList.add('active'));
 function toggleKeyboard() {
   if (challengeModeToggle.checked) {
     keyboard.classList.add('hide');
-    keyboard.removeEventListener('click', enterWord);
   } else {
     keyboard.classList.remove('hide');
-    keyboard.addEventListener('click', enterWord);
   }
 }
 
@@ -69,7 +67,7 @@ function enterWord(e) {
     cell.setAttribute('data-filled', true);
   }
 
-  if (target === 'Backspace' || target === 'Delete') {
+  if (target === 'Backspace' || target === 'Delete' || target === '<-') {
     const cell = [...activeRow].findLast((cell) =>
       cell.hasAttribute('data-filled'),
     );
@@ -89,7 +87,6 @@ function enterWord(e) {
 
 function prepNextRow(clues) {
   if (clues.every((clue) => clue.color === 'var(--green)')) {
-    // Use a postSuccessMessage function instead.
     postMessage('You guessed it!', 'dialog');
     return;
   }
