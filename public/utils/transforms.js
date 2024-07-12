@@ -10,7 +10,12 @@ export function createWordFromRow(currentActiveRow) {
   return letterArray.join('');
 }
 
-export async function revealLetters(clues, keyboardLetters, currentActiveRow) {
+export async function revealLetters(
+  clues,
+  keyboardLetters,
+  currentActiveRow,
+  challengeModeToggle,
+) {
   for (let i = 0; i < currentActiveRow.length; i++) {
     const cell = currentActiveRow[i];
     await delay(400);
@@ -23,6 +28,8 @@ export async function revealLetters(clues, keyboardLetters, currentActiveRow) {
     const targetedKeyboardLetter = [...keyboardLetters].find(
       (letter) => letter.innerText.toLowerCase() === clue.letter,
     );
-    targetedKeyboardLetter.style.backgroundColor = clue.color;
+    targetedKeyboardLetter.style.backgroundColor = !challengeModeToggle.checked
+      ? clue.color
+      : 'none';
   });
 }

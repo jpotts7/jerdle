@@ -40,16 +40,6 @@ for (let i = 1; i <= NUMBER_OF_CELLS; i++) {
 // Set the first row as the active row on initial page load.
 currentActiveRow = document.querySelectorAll(`.row-${row}`);
 currentActiveRow.forEach((cell) => cell.classList.add('active'));
-// activeRow = currentActiveRow;
-
-// Determine whether or not to show the keyboard (challenge mode).
-function toggleKeyboard() {
-  if (challengeModeToggle.checked) {
-    keyboard.classList.add('hide');
-  } else {
-    keyboard.classList.remove('hide');
-  }
-}
 
 function enterWord(e) {
   const target = e.key || e.target.innerText;
@@ -104,6 +94,14 @@ function prepNextRow(clues) {
   currentActiveRow = nextActiveRow;
 }
 
+function handleToggle() {
+  if (challengeModeToggle.checked) {
+    [...keyboardLetters].forEach(
+      (letter) => (letter.style.backgroundColor = 'unset'),
+    );
+  }
+}
+
 async function handleSubmit(e) {
   e.preventDefault();
 
@@ -122,7 +120,12 @@ async function handleSubmit(e) {
   }
 
   const clues = await hitApiEndpoint(word, '/submit-word');
-  await revealLetters(clues, keyboardLetters, currentActiveRow);
+  await revealLetters(
+    clues,
+    keyboardLetters,
+    currentActiveRow,
+    challengeModeToggle,
+  );
   await delay(400);
   prepNextRow(clues);
 }
@@ -140,6 +143,6 @@ function handleKeyDown(e) {
 // Event Listeners
 body.addEventListener('keydown', enterWord);
 keyboard.addEventListener('click', enterWord);
-challengeModeToggle.addEventListener('click', toggleKeyboard);
+challengeModeToggle.addEventListener('click', handleToggle);
 button.addEventListener('click', handleSubmit);
 button.addEventListener('keydown', handleKeyDown);

@@ -117,13 +117,6 @@ button {
   align-items: center;
   gap: 4px;
   padding-top: 24px;
-  opacity: 1;
-  transition: all 0.5s;
-
-  &.hide {
-    opacity: 0;
-    visibility: hidden;
-  }
 }
 
 .keyboard-row {
