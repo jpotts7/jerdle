@@ -6,7 +6,6 @@ import { createWordFromRow, revealLetters } from './utils/transforms.js';
 // Build Jerdle Grid
 const NUMBER_OF_CELLS = 36;
 const body = document.querySelector('body');
-const main = document.querySelector('main');
 const grid = document.querySelector('section');
 const keyboard = document.querySelector('#keyboard');
 const keyboardLetters = document.querySelectorAll('.keyboard-letter');
@@ -87,7 +86,7 @@ function enterWord(e) {
 
 function prepNextRow(clues) {
   if (clues.every((clue) => clue.color === 'var(--green)')) {
-    postMessage('You guessed it!', 'dialog');
+    postMessage('Congratulations! :)', 'success');
     return;
   }
 
@@ -96,19 +95,13 @@ function prepNextRow(clues) {
   const nextActiveRow = document.querySelectorAll(`.row-${row}`);
 
   if (nextActiveRow.length === 0) {
-    postMessage('You lost! :(', 'dialog');
+    postMessage('You lost! :(');
     return;
   }
 
   nextActiveRow.forEach((cell) => cell.classList.add('active'));
 
   currentActiveRow = nextActiveRow;
-
-  const errorMessage = document.querySelector('.error');
-
-  if (errorMessage) {
-    main.removeChild(errorMessage);
-  }
 }
 
 async function handleSubmit(e) {
